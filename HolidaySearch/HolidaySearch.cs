@@ -11,11 +11,17 @@ namespace HolidaySearch
         public IEnumerable<Hotel> Search()
         {
             var hotels = GetHotels();
+            //var flights = GetFlights();
 
             return hotels;
         }
 
-        
+        //public IEnumerable<Flight> GetFlights()
+        //{
+        //    var results = GetData<Flight>("FlightData.json");
+        //    return results;
+        //}
+
         public IEnumerable<Hotel> GetHotels()
         {
             var results = GetData<Hotel>("HotelData.json");
