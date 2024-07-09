@@ -18,19 +18,6 @@ namespace HolidaySearch.Tests
             _flightService = new FlightService(_dataLookupService);
         }
 
-        [Fact]
-        public void GivenHolidaySearch_WhenSearch_ThenReturnShouldNotBeEmpty()
-        {
-            //Given
-            var subject = new HolidaySearch(_lowestCostCalculator, _hotelService, _flightService);
-
-            //When
-            var result = subject.Search("MAN", "AGP", DateTime.Parse("2023-07-01"), 7);
-
-            //Then
-            result.Should().NotBeNull();
-        }
-
         [Theory]
         [InlineData("MAN", "AGP", "2023-07-01", 7, 2, 9)]
         [InlineData("LTN", "PMI", "2023-06-15", 10, 4, 5)]
