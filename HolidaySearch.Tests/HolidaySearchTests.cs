@@ -3,18 +3,19 @@ namespace HolidaySearch.Tests
 {
 
     using FluentAssertions;
-    using static System.Runtime.InteropServices.JavaScript.JSType;
 
     public class HolidaySearchTests
     {
+
         [Fact]
         public void GivenHolidaySearch_WhenSearch_ThenReturnShouldNotBeEmpty()
         {
             //Given
-            var subject = new HolidaySearch();
+            var costCalc = new LowestCostCalculator();
+            var subject = new HolidaySearch(costCalc);
 
             //When
-            var result = subject.Search();
+            var result = subject.Search("MAN", "AGP", DateTime.Parse("2023-07-01"), 7);
 
             //Then
             result.Should().NotBeNull();
@@ -24,15 +25,16 @@ namespace HolidaySearch.Tests
         public void GivenHolidaySearch_WhenSearch_ThenReturnExpectedPackageReturns()
         {
             //Given
-            var subject = new HolidaySearch();
+            var costCalc = new LowestCostCalculator();
+            var subject = new HolidaySearch(costCalc);
 
             //When
-            var result = subject.Search();
+            var result = subject.Search("MAN", "AGP", DateTime.Parse("2023-07-01"), 7);
 
             //Then
             result.Should().NotBeNull();
-            result.Flight.Id.Should().Be("");
-            result.Hotel.Id.Should().Be("");
+            result.Flight.Id.Should().Be(2);
+            result.Hotel.Id.Should().Be(9);
         }
     }
 }
