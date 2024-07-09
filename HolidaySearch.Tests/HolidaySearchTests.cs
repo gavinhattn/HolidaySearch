@@ -1,18 +1,28 @@
+using FluentAssertions;
+using HolidaySearch.Services;
+
 namespace HolidaySearch.Tests
-
 {
-
-    using FluentAssertions;
-
     public class HolidaySearchTests
     {
+        private readonly LowestCostCalculator _lowestCostCalculator;
+        private readonly JsonFileDataLookup _dataLookupService;
+        private readonly HotelService _hotelService;
+        private readonly FlightService _flightService;
+
+        public HolidaySearchTests()
+        {
+            _lowestCostCalculator = new LowestCostCalculator();
+            _dataLookupService = new JsonFileDataLookup();
+            _hotelService = new HotelService(_dataLookupService);
+            _flightService = new FlightService(_dataLookupService);
+        }
 
         [Fact]
         public void GivenHolidaySearch_WhenSearch_ThenReturnShouldNotBeEmpty()
         {
             //Given
-            var costCalc = new LowestCostCalculator();
-            var subject = new HolidaySearch(costCalc);
+            var subject = new HolidaySearch(_lowestCostCalculator, _hotelService, _flightService);
 
             //When
             var result = subject.Search("MAN", "AGP", DateTime.Parse("2023-07-01"), 7);
@@ -25,8 +35,7 @@ namespace HolidaySearch.Tests
         public void GivenHolidaySearch_WhenSearch_ThenReturnExpectedPackageReturns()
         {
             //Given
-            var costCalc = new LowestCostCalculator();
-            var subject = new HolidaySearch(costCalc);
+            var subject = new HolidaySearch(_lowestCostCalculator, _hotelService, _flightService);
 
             //When
             var result = subject.Search("MAN", "AGP", DateTime.Parse("2023-07-01"), 7);
@@ -41,8 +50,7 @@ namespace HolidaySearch.Tests
         public void GivenHolidaySearch_ThatIsNotInOurData_WhenSearch_ThenReturnPackageShouldBeNull()
         {
             //Given
-            var costCalc = new LowestCostCalculator();
-            var subject = new HolidaySearch(costCalc);
+            var subject = new HolidaySearch(_lowestCostCalculator, _hotelService, _flightService);
 
             //When
             var result = subject.Search("ZRH", "AGP", DateTime.Parse("2023-07-01"), 3);

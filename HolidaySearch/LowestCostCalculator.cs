@@ -1,4 +1,6 @@
-﻿namespace HolidaySearch
+﻿using HolidaySearch.Models;
+
+namespace HolidaySearch
 {
     public class LowestCostCalculator
     {

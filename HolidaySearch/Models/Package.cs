@@ -1,4 +1,4 @@
-﻿namespace HolidaySearch
+﻿namespace HolidaySearch.Models
 {
     public class Package
     {
@@ -7,10 +7,10 @@
             Hotel = hotel;
             Flight = flight;
             Price = price;
-        } 
-        public Hotel Hotel { get;}
-        public Flight Flight { get;}
-        public int Price { get;}
+        }
+        public Hotel Hotel { get; }
+        public Flight Flight { get; }
+        public int Price { get; }
 
     }
 }
